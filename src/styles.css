@@ -26,3 +26,7 @@ body {
     background-color: rgb(78, 75, 75);
     border-color: rgba(0,0,0,0.1);
 }
+
+.titulo {
+    font-family: 'Montserrat', sans-serif;
+}
