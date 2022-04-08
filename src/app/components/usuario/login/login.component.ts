@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     usuario: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(4)]],
   });
 
   constructor(private fb: FormBuilder) { }
@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     console.log(this.miFormulario.value);
-    console.log(this.miFormulario.valid);
+    console.log(this.miFormulario);  
+  }
+
+  campoNoEsValido(campo: string, validacion: string): boolean {
+    return this.miFormulario.get(campo)!.hasError(validacion) && this.miFormulario.get(campo)!.touched;
   }
 
 }
