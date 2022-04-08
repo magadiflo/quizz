@@ -1,4 +1,12 @@
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
-    <input type="text" class="form-control mb-3 input-ingresar" placeholder="PIN del juego">
-    <button type="button" class="btn-ingresar btn-principal">Ingresar</button>
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+        <strong>Por favor ingrese PIN</strong>
+    </div>
+    <input type="text" [(ngModel)]="pin" class="form-control mb-3 input-ingresar" placeholder="PIN del juego">
+    <button type="button" (click)="ingresar()" class="btn-ingresar btn-principal">Ingresar</button>
+</div>
+<div class="fixed-bottom text-center">
+    <p class="m-0 p-3 text-white">Crea tu propio cuestionario GRATIS
+        <a href="#" class="text-white text-decoration-none">aqui</a>
+    </p>
 </div>
