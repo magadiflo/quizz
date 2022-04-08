@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     usuario: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
+    password: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder) { }
