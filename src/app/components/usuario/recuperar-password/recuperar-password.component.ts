@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recuperar-password',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecuperarPasswordComponent implements OnInit {
 
-  constructor() { }
+  miFormulario: FormGroup = this.fb.group({
+    correo: ['', [Validators.required, Validators.email]],
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  recuperarPassword(): void {
+    console.log(this.miFormulario.value);  
+  }
+
+  campoNoEsValido(campo: string, validacion: string): boolean {
+    return this.miFormulario.get(campo)!.hasError(validacion) && this.miFormulario.get(campo)!.touched;
   }
 
 }
