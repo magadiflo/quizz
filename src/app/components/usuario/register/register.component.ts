@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
     usuario: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     'password-repeat': [''],
+  }, {
+    validators: [this.checkPassword('password', 'password-repeat')],
   });
 
   constructor(private fb: FormBuilder) { }
@@ -20,10 +22,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registrar(): void {
-    console.log(this.miFormulario.value);  
+    console.log(this.miFormulario);
   }
 
   campoNoEsValido(campo: string, validacion: string): boolean {
     return this.miFormulario.get(campo)!.hasError(validacion) && this.miFormulario.get(campo)!.touched;
+  }
+
+  checkPassword(password: string, passworRepeat: string) {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passControl = formGroup.get(password);
+      const passRepControl = formGroup.get(passworRepeat);
+      if (passControl?.value !== passRepControl?.value) {
+        formGroup.get(passworRepeat)?.setErrors({ noEsIgual: true });
+        return { noEsIgual: true };
+      }
+      formGroup.get(passworRepeat)?.setErrors(null);
+      return null;
+    }
   }
 }
