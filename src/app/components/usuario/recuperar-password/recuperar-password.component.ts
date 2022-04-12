@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ToastrService } from 'ngx-toastr';
+
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-recuperar-password',
@@ -12,13 +18,30 @@ export class RecuperarPasswordComponent implements OnInit {
     correo: ['', [Validators.required, Validators.email]],
   });
 
-  constructor(private fb: FormBuilder) { }
+  loading: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private afAuth: AngularFireAuth,
+    private router: Router, 
+    private toastr: ToastrService,
+    private _errorService: ErrorService) { }
 
   ngOnInit(): void {
   }
 
   recuperarPassword(): void {
-    console.log(this.miFormulario.value);  
+    this.loading = true;
+    const { correo } = this.miFormulario.value;
+    this.afAuth.sendPasswordResetEmail(correo).then(() => {
+      this.toastr.info('Enviamos un correo electrónico para reestablecer su password', 'Reestablecer password'); 
+      this.router.navigate(['/usuario']);
+      this.loading = false;
+    }).catch(error => {
+      this.toastr.error(this._errorService.error(error.code), 'Error');
+      this.miFormulario.reset();
+      this.loading = false;
+    });
   }
 
   campoNoEsValido(campo: string, validacion: string): boolean {
