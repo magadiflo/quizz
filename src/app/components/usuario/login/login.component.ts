@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/usuario', 'verificar-correo']);
       } else {
         this.toastr.success('Bienvenido', '¡Acceso correcto!');
+        this.router.navigate(['/dashboard']);
       }
     }).catch(error => {
       console.log(error);
