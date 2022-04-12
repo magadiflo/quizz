@@ -38,8 +38,9 @@ export class RegisterComponent implements OnInit {
     this.loading = true;
     const usuario = this.miFormulario.get('usuario')?.value;
     const password = this.miFormulario.get('password')?.value;
-    this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rpta => {
-      this.toastr.success('El usuario fue registrado con éxito', '¡Usuario registrado!');
+    this.afAuth.createUserWithEmailAndPassword(usuario, password).then(resp => {
+      resp.user?.sendEmailVerification(); 
+      this.toastr.success('Enviamos un correo electrónico para verificar su cuenta', '¡Usuario registrado!');
       this.router.navigate(['/usuario']);
     }).catch(error => {
       console.log(error.code);
