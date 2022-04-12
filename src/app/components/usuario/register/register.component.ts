@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
+
+import { ErrorService } from '../../../services/error.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +28,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private router: Router, 
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private _errorService: ErrorService) { }
 
   ngOnInit(): void {
   }
@@ -41,8 +44,9 @@ export class RegisterComponent implements OnInit {
     }).catch(error => {
       console.log(error.code);
       console.log(error);  
+      this.miFormulario.reset();
       this.loading = false;
-      this.toastr.error(this.error(error.code), '¡Error!');
+      this.toastr.error(this._errorService.error(error.code), '¡Error!');
     });
   }
 
@@ -60,19 +64,7 @@ export class RegisterComponent implements OnInit {
       }
       formGroup.get(passworRepeat)?.setErrors(null);
       return null;
-    }
+    }  
   }
 
-  private error(code: string): string {
-   switch(code) {
-    case 'auth/email-already-in-use': 
-      return "El correo ya fue registrado";
-    case 'auth/invalid-email': 
-      return "El formato del correo no es válido";
-    case 'auth/weak-password': 
-      return "La contraseña debe tener como mínimo 6 caracteres";
-    default: 
-      return "Error desconocido";
-   }
-  }
 }
