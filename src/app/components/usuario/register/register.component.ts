@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
@@ -16,13 +17,22 @@ export class RegisterComponent implements OnInit {
     validators: [this.checkPassword('password', 'password-repeat')],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }
 
   registrar(): void {
     console.log(this.miFormulario);
+    const usuario = this.miFormulario.get('usuario')?.value;
+    const password = this.miFormulario.get('password')?.value;
+    this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rpta => {
+      console.log(rpta);  
+    }).catch(error => {
+      console.log(error);  
+    });
   }
 
   campoNoEsValido(campo: string, validacion: string): boolean {
