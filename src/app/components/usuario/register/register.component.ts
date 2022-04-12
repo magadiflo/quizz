@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
     validators: [this.checkPassword('password', 'password-repeat')],
   });
 
+  loading: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
@@ -30,6 +32,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registrar(): void {
+    this.loading = true;
     const usuario = this.miFormulario.get('usuario')?.value;
     const password = this.miFormulario.get('password')?.value;
     this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rpta => {
@@ -38,6 +41,7 @@ export class RegisterComponent implements OnInit {
     }).catch(error => {
       console.log(error.code);
       console.log(error);  
+      this.loading = false;
       this.toastr.error(this.error(error.code), '¡Error!');
     });
   }
