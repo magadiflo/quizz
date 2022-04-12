@@ -1,31 +1,36 @@
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-12 col-lg-6 offset-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="text-center titulo">Login</h2>
-                    <form [formGroup]="miFormulario" (ngSubmit)="login()">
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="correo" formControlName="usuario">
-                            <div class="form-text text-danger" *ngIf="campoNoEsValido('usuario', 'required')">El correo es requerido</div>
-                            <div class="form-text text-danger" *ngIf="campoNoEsValido('usuario', 'email')">Formato de correo no válido</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" formControlName="password">
-                            <div class="form-text text-danger" *ngIf="campoNoEsValido('password', 'required')">La contraseña es requerida</div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button type="button" [routerLink]="['/']" class="btn btn-secondary">Volver</button>
-                            <button type="submit" [disabled]="miFormulario.invalid" class="btn btn-success">Aceptar</button>
-                        </div>
-                        <div class="text-center mt-2">
-                            <a [routerLink]="['register']">Registrarse</a> | <a [routerLink]="['recuperar-password']">Recuperar contraseña</a>
-                        </div>
-                    </form>
+    <div *ngIf="loading; else formulario" class="d-flex justify-content-center align-items-center">
+        <app-spinner></app-spinner>
+    </div>
+    <ng-template #formulario>
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center titulo">Login</h2>
+                        <form [formGroup]="miFormulario" (ngSubmit)="login()">
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="correo" formControlName="usuario">
+                                <div class="form-text text-danger" *ngIf="campoNoEsValido('usuario', 'required')">El correo es requerido</div>
+                                <div class="form-text text-danger" *ngIf="campoNoEsValido('usuario', 'email')">Formato de correo no válido</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" formControlName="password">
+                                <div class="form-text text-danger" *ngIf="campoNoEsValido('password', 'required')">La contraseña es requerida</div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" [routerLink]="['/']" class="btn btn-secondary">Volver</button>
+                                <button type="submit" [disabled]="miFormulario.invalid" class="btn btn-success">Aceptar</button>
+                            </div>
+                            <div class="text-center mt-2">
+                                <a [routerLink]="['register']">Registrarse</a> | <a [routerLink]="['recuperar-password']">Recuperar contraseña</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </ng-template>    
 </div>

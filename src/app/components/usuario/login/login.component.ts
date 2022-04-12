@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,26 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder) { }
+  loading: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
-    console.log(this.miFormulario.value);
-    console.log(this.miFormulario);  
+    this.loading = true;
+    const { usuario, password } = this.miFormulario.value;
+    this.afAuth.signInWithEmailAndPassword(usuario, password).then(resp => {
+      console.log(resp);
+      this.loading = false;
+    }).catch(error => {
+      console.log(error);
+      this.loading = false;
+      this.miFormulario.reset();
+    });
   }
 
   campoNoEsValido(campo: string, validacion: string): boolean {
