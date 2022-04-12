@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
-    private _errorService: ErrorService) { }
+    private _errorService: ErrorService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,8 +36,12 @@ export class LoginComponent implements OnInit {
     const { usuario, password } = this.miFormulario.value;
     this.afAuth.signInWithEmailAndPassword(usuario, password).then(resp => {
       console.log(resp);
-      this.toastr.success('Bienvenido', '¡Acceso correcto!');
       this.loading = false;
+      if(resp.user?.emailVerified == false){
+        this.router.navigate(['/usuario', 'verificar-correo']);
+      } else {
+        this.toastr.success('Bienvenido', '¡Acceso correcto!');
+      }
     }).catch(error => {
       console.log(error);
       this.toastr.error(this._errorService.error(error.code), '¡Error!');
