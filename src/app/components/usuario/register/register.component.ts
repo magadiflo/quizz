@@ -36,8 +36,9 @@ export class RegisterComponent implements OnInit {
       this.toastr.success('El usuario fue registrado con éxito', '¡Usuario registrado!');
       this.router.navigate(['/usuario']);
     }).catch(error => {
+      console.log(error.code);
       console.log(error);  
-      this.toastr.error('No se pudo registrar el usuario', 'Ups, ocurrió un error!');
+      this.toastr.error(this.error(error.code), '¡Error!');
     });
   }
 
@@ -56,5 +57,18 @@ export class RegisterComponent implements OnInit {
       formGroup.get(passworRepeat)?.setErrors(null);
       return null;
     }
+  }
+
+  private error(code: string): string {
+   switch(code) {
+    case 'auth/email-already-in-use': 
+      return "El correo ya fue registrado";
+    case 'auth/invalid-email': 
+      return "El formato del correo no es válido";
+    case 'auth/weak-password': 
+      return "La contraseña debe tener como mínimo 6 caracteres";
+    default: 
+      return "Error desconocido";
+   }
   }
 }
