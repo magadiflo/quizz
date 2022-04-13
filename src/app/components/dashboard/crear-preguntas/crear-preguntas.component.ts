@@ -41,4 +41,8 @@ export class CrearPreguntasComponent implements OnInit {
     console.log(this.quizzService.tituloCuestionario, this.quizzService.descripcion);
   }
 
+  agrearPregunta() {
+    console.log(this.miFormulario.value); 
+  }
+
 }

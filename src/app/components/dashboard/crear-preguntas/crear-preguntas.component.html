@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row mt-3 mb-5">
         <div class="col-lg-8 offset-lg-2">
-            <form>
-                <input type="text" class="form-control form-control-lg text-center input-pregunta"
+            <form [formGroup]="miFormulario" (ngSubmit)="agrearPregunta()">
+                <input type="text" formControlName="titulo" class="form-control form-control-lg text-center input-pregunta"
                     placeholder="Ingrese pregunta" maxlength="150">
                 <div class="row mt-5">
                     <div class="col-6 text-center">
@@ -19,48 +19,48 @@
                         <div class="fondo-item">
                             <p class="titulo-segundos-puntos">PUNTOS</p>
                             <p class="seg-puntos">100</p>
-                            <input type="range" class="form-range p-3" min="0" max="100" aria-label="Rango puntaje">
+                            <input type="range" formControlName="puntos" class="form-range p-3" min="0" max="100" aria-label="Rango puntaje">
                         </div>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 1">
+                        <div formGroupName="respuesta1" class="input-group">
+                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 1">
                             <div class="input-group-text">
                               <i class="far fa-circle"></i>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
+                        <div formGroupName="respuesta2" class="input-group">
+                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
                             <div class="input-group-text">
                               <i class="far fa-circle"></i>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6">
+                    <div formGroupName="respuesta3" class="col-6">
                         <div class="input-group">
-                            <input type="text" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 3 (opcional)">
+                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 3 (opcional)">
                             <div class="input-group-text">
                               <i class="far fa-circle"></i>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 4 (opcional)">
+                        <div formGroupName="respuesta4" class="input-group">
+                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 4 (opcional)">
                             <div class="input-group-text">
                               <i class="far fa-circle"></i>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                    <button type="button" class="btn-principal">Agregar pregunta</button>
+                    <button type="submit" class="btn-principal">Agregar pregunta</button>
                 </div>
             </form>
         </div>
