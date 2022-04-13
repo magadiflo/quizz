@@ -30,3 +30,7 @@ body {
 .titulo {
     font-family: 'Montserrat', sans-serif;
 }
+
+.card-titulo {
+    padding: 0px 22px;
+}
