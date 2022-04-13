@@ -12,5 +12,7 @@ https://www.npmjs.com/package/ngx-toastr
 https://tobiasahlin.com/spinkit/
 ```
 
-
-
+# Fontawesome v6.1.1
+```
+https://fontawesome.com/icons
+```

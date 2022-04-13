@@ -1,3 +1,9 @@
 .btn-quizz {
     padding: 0px 50px;
 }
+
+.fa-solid {
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0 2px;
+}
