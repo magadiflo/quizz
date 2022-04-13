@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-quizz',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearQuizzComponent implements OnInit {
 
-  constructor() { }
+  miFormulario: FormGroup = this.fb.group({
+    titulo: ['', [Validators.required]],
+    descripcion: ['', [Validators.required]],
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  siguiente(): void {
+    console.log(this.miFormulario);  
   }
 
 }
