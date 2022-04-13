@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     const { usuario, password } = this.miFormulario.value;
     this.afAuth.signInWithEmailAndPassword(usuario, password).then(resp => {
-      console.log(resp);
+      //console.log(resp);
       this.loading = false;
       if(resp.user?.emailVerified == false){
         this.router.navigate(['/usuario', 'verificar-correo']);
