@@ -2,3 +2,37 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
 }
+
+.fondo-item {
+    background-color: #131d2d;
+    border-radius: 20px;
+    height: 155px;
+}
+
+.titulo-segundos-puntos {
+    font-size: 32px;
+    font-weight: 800;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.seg-puntos {
+    font-size: 20px;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.suma-resta {
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: #273346;
+    padding: 7px;
+    border-radius: 15px;
+    margin-left: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    background: #FFFFFF;
+    font-size: 1.5rem;
+}
