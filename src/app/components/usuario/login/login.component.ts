@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 
 import { ErrorService } from '../../../services/error.service';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,8 @@ export class LoginComponent implements OnInit {
       if(resp.user?.emailVerified == false){
         this.router.navigate(['/usuario', 'verificar-correo']);
       } else {
-        this.toastr.success('Bienvenido', '¡Acceso correcto!');
+        //this.toastr.success('Bienvenido', '¡Acceso correcto!');
+        this.setLocalStorage(resp.user);
         this.router.navigate(['/dashboard']);
       }
     }).catch(error => {
@@ -53,6 +55,14 @@ export class LoginComponent implements OnInit {
 
   campoNoEsValido(campo: string, validacion: string): boolean {
     return this.miFormulario.get(campo)!.hasError(validacion) && this.miFormulario.get(campo)!.touched;
+  }
+
+  setLocalStorage(user: any) {   
+    const usuario: User = {
+      uid: user.uid,
+      email: user.email,
+    }
+    localStorage.setItem('user', JSON.stringify(usuario));
   }
 
 }
