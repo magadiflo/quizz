@@ -36,3 +36,13 @@ input[type="range"]::-webkit-slider-thumb {
     background: #FFFFFF;
     font-size: 1.5rem;
 }
+
+.input-respuesta {
+    font-family: 'Montserrat', sans-serif;
+    padding: 1rem;
+}
+
+.far {
+    font-size: 24px;
+    cursor: pointer;
+}
