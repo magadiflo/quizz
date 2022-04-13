@@ -1,1 +1,8 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-light navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand titulo" [routerLink]="['/dashboard']">Quizz</a>
+        <div class="d-flex">
+            <button (click)="logout()" class="btn btn-outline-success" type="submit">Logout</button>
+        </div>
+    </div>
+</nav>
