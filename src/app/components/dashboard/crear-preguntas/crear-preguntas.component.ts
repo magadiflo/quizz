@@ -69,4 +69,11 @@ export class CrearPreguntasComponent implements OnInit {
     return this.miFormulario.get(campoRespuesta)?.get('esCorrecta')?.value;
   }
 
+  cambiaIconoRespuesta(campoRespuesta: string) {
+    return {
+      'far fa-circle' : !this.obtenerEstadoRespuesta(campoRespuesta),
+      'fas fa-check-circle': this.obtenerEstadoRespuesta(campoRespuesta)
+    }
+  }
+
 }

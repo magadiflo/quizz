@@ -28,7 +28,7 @@
                         <div formGroupName="respuesta1" class="input-group">
                             <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 1">
                             <div (click)="esCorrecta('respuesta1')" class="input-group-text">
-                              <i class="far fa-circle"></i>
+                                <i [ngClass]="cambiaIconoRespuesta('respuesta1')"></i>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         <div formGroupName="respuesta2" class="input-group">
                             <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
                             <div (click)="esCorrecta('respuesta2')" class="input-group-text">
-                              <i class="far fa-circle"></i>
+                                <i [ngClass]="cambiaIconoRespuesta('respuesta2')"></i>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         <div class="input-group">
                             <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 3 (opcional)">
                             <div (click)="esCorrecta('respuesta3')" class="input-group-text">
-                              <i class="far fa-circle"></i>
+                                <i [ngClass]="cambiaIconoRespuesta('respuesta3')"></i>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <div formGroupName="respuesta4" class="input-group">
                             <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 4 (opcional)">
                             <div (click)="esCorrecta('respuesta4')" class="input-group-text">
-                              <i class="far fa-circle"></i>
+                                <i [ngClass]="cambiaIconoRespuesta('respuesta4')"></i>
                             </div>
                         </div>
                     </div>
