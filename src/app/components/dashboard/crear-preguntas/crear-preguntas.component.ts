@@ -60,13 +60,25 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   esCorrecta(campoRespuesta: string): void {
-    this.miFormulario.get(campoRespuesta)?.patchValue({
-      esCorrecta: !this.obtenerEstadoRespuesta(campoRespuesta),
-    });
+    this.setChangeValueRespuesta(campoRespuesta, !this.obtenerEstadoRespuesta(campoRespuesta));
+    this.setFalseRespuestas(campoRespuesta);
   }
 
   obtenerEstadoRespuesta(campoRespuesta: string): boolean {
     return this.miFormulario.get(campoRespuesta)?.get('esCorrecta')?.value;
+  }
+
+  setFalseRespuestas(campoRespuestaSelec: string) {
+    const camposRespuestas = ['respuesta1', 'respuesta2', 'respuesta3', 'respuesta4'];
+    camposRespuestas
+      .filter(campo => campo != campoRespuestaSelec)
+      .map(campoNoSeleccionado => this.setChangeValueRespuesta(campoNoSeleccionado, false));
+  }
+
+  setChangeValueRespuesta(campo: string, value: boolean): void {
+    this.miFormulario.get(campo)?.patchValue({
+      esCorrecta: value
+    });
   }
 
   cambiaIconoRespuesta(campoRespuesta: string) {
