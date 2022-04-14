@@ -36,7 +36,7 @@
                         <div formGroupName="respuesta2" class="input-group">
                             <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
                             <div (click)="esCorrecta('respuesta2')" class="input-group-text">
-                                <i [ngClass]="cambiaIconoRespuesta('respuesta2')"></i>
+                                <i class="animate__animated animate__bounce" [ngClass]="cambiaIconoRespuesta('respuesta2')"></i>
                             </div>
                         </div>
                     </div>

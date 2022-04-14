@@ -16,3 +16,8 @@ https://tobiasahlin.com/spinkit/
 ```
 https://fontawesome.com/icons
 ```
+
+# Animate CSS
+```
+https://animate.style/
+```
