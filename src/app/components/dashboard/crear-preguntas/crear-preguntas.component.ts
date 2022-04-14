@@ -16,19 +16,19 @@ export class CrearPreguntasComponent implements OnInit {
     puntos: [100, [Validators.required]],
     respuesta1: this.fb.group({
       titulo: ['', [Validators.required]],
-      esCorrecto: [false, [Validators.required]],
+      esCorrecta: [false, [Validators.required]],
     }),
     respuesta2: this.fb.group({
       titulo: ['', [Validators.required]],
-      esCorrecto: [false, [Validators.required]],
+      esCorrecta: [false, [Validators.required]],
     }),
     respuesta3: this.fb.group({
       titulo: '',
-      esCorrecto: false,
+      esCorrecta: false,
     }),
     respuesta4: this.fb.group({
       titulo: '',
-      esCorrecto: false,
+      esCorrecta: false,
     }),
   });
 
@@ -57,6 +57,16 @@ export class CrearPreguntasComponent implements OnInit {
     this.miFormulario.patchValue({
       segundos: s < 5 ? 5 : s
     });
+  }
+
+  esCorrecta(campoRespuesta: string): void {
+    this.miFormulario.get(campoRespuesta)?.patchValue({
+      esCorrecta: !this.obtenerEstadoRespuesta(campoRespuesta),
+    });
+  }
+
+  obtenerEstadoRespuesta(campoRespuesta: string): boolean {
+    return this.miFormulario.get(campoRespuesta)?.get('esCorrecta')?.value;
   }
 
 }
