@@ -36,6 +36,10 @@ export class CrearPreguntasComponent implements OnInit {
     return this.miFormulario.controls['segundos'].value;
   }
 
+  get puntos(): number {
+    return this.miFormulario.controls['puntos'].value;
+  }
+
   constructor(
     private quizzService: QuizzService,
     private fb: FormBuilder) { }
@@ -48,10 +52,10 @@ export class CrearPreguntasComponent implements OnInit {
     console.log(this.miFormulario.value);
   }
 
-  cambiaSegundos(segundos: number) {
+  cambiaSegundos(segundos: number): void {
     const s = this.seg + segundos;
     this.miFormulario.patchValue({
-      segundos: s < 1 ? 1 : s
+      segundos: s < 5 ? 5 : s
     });
   }
 
