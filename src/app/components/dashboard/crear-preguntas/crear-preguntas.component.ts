@@ -32,6 +32,9 @@ export class CrearPreguntasComponent implements OnInit {
     }),
   });
 
+  get seg(): number {
+    return this.miFormulario.controls['segundos'].value;
+  }
 
   constructor(
     private quizzService: QuizzService,
@@ -42,7 +45,14 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   agrearPregunta() {
-    console.log(this.miFormulario.value); 
+    console.log(this.miFormulario.value);
+  }
+
+  cambiaSegundos(segundos: number) {
+    const s = this.seg + segundos;
+    this.miFormulario.patchValue({
+      segundos: s < 1 ? 1 : s
+    });
   }
 
 }
