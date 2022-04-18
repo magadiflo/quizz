@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { QuizzService } from '../../../services/quizz.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Respuesta } from '../../../models/respuesta.model';
+import { Pregunta } from '../../../models/pregunta.model';
+
 @Component({
   selector: 'app-crear-preguntas',
   templateUrl: './crear-preguntas.component.html',
@@ -51,10 +54,24 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   agrearPregunta(): void {
-    console.log(this.miFormulario.value);
     if (this.miFormulario.invalid || this.todasIncorrectas()) {
       return this.error();
     }
+    let listaRespuestas: Respuesta[] = [];
+    listaRespuestas.push({ titulo: <string>this.getValue('respuesta1', 'titulo'), esCorrecta: <boolean>this.getValue('respuesta1', 'esCorrecta') });
+    listaRespuestas.push({ titulo: <string>this.getValue('respuesta2', 'titulo'), esCorrecta: <boolean>this.getValue('respuesta2', 'esCorrecta') });
+    if (this.tieneValor('respuesta3')) {
+      listaRespuestas.push({ titulo: <string>this.getValue('respuesta3', 'titulo'), esCorrecta: <boolean>this.getValue('respuesta3', 'esCorrecta') });
+    }
+    if (this.tieneValor('respuesta4')) {
+      listaRespuestas.push({ titulo: <string>this.getValue('respuesta4', 'titulo'), esCorrecta: <boolean>this.getValue('respuesta4', 'esCorrecta') });
+    }
+    const titulo = this.miFormulario.get('titulo')?.value;
+    const puntos = this.miFormulario.get('puntos')?.value;
+    const segundos = this.miFormulario.get('segundos')?.value;
+
+    const pregunta: Pregunta = { titulo, puntos, segundos, listaRespuestas };
+    console.log(pregunta);
   }
 
   todasIncorrectas(): boolean { //Verifica que solo haya una respuesta seleccionada
@@ -114,6 +131,10 @@ export class CrearPreguntasComponent implements OnInit {
     if (!this.tieneValor(campo)) {
       this.setChangeValueRespuesta(campo, false);
     }
+  }
+
+  getValue(campo: string, propiedad: string): string | boolean {
+    return this.miFormulario.get(campo)?.get(propiedad)?.value;
   }
 
 }
