@@ -50,11 +50,16 @@ export class CrearPreguntasComponent implements OnInit {
     console.log(this.quizzService.tituloCuestionario, this.quizzService.descripcion);
   }
 
-  agrearPregunta() {
+  agrearPregunta(): void {
     console.log(this.miFormulario.value);
-    if(this.miFormulario.invalid){
+    if (this.miFormulario.invalid || this.todasIncorrectas()) {
       return this.error();
     }
+  }
+
+  todasIncorrectas(): boolean { //Verifica que solo haya una respuesta seleccionada
+    const camposRespuestas = ['respuesta1', 'respuesta2', 'respuesta3', 'respuesta4'];
+    return camposRespuestas.filter(campo => this.miFormulario.get(campo)?.get('esCorrecta')?.value === true).length !== 1;
   }
 
   error(): void {
@@ -70,12 +75,19 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   esCorrecta(campoRespuesta: string): void {
+    if ((campoRespuesta == 'respuesta3' || campoRespuesta == 'respuesta4') && !this.tieneValor(campoRespuesta)) {
+      return;
+    }
     this.setChangeValueRespuesta(campoRespuesta, !this.obtenerEstadoRespuesta(campoRespuesta));
     this.setFalseRespuestas(campoRespuesta);
   }
 
   obtenerEstadoRespuesta(campoRespuesta: string): boolean {
     return this.miFormulario.get(campoRespuesta)?.get('esCorrecta')?.value;
+  }
+
+  tieneValor(campo: string): boolean {
+    return this.miFormulario.get(campo)?.get('titulo')?.value.trim() != '';
   }
 
   setFalseRespuestas(campoRespuestaSelec: string) {
@@ -95,6 +107,12 @@ export class CrearPreguntasComponent implements OnInit {
     return {
       'far fa-circle': !this.obtenerEstadoRespuesta(campoRespuesta),
       'fas fa-check-circle animate__animated animate__heartBeat': this.obtenerEstadoRespuesta(campoRespuesta)
+    }
+  }
+
+  cambio(campo: string) {
+    if (!this.tieneValor(campo)) {
+      this.setChangeValueRespuesta(campo, false);
     }
   }
 

@@ -31,7 +31,7 @@
                 <div class="row mt-5">
                     <div class="col-6">
                         <div formGroupName="respuesta1" class="input-group">
-                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 1">
+                            <input type="text" formControlName="titulo" (change)="cambio('respuesta1')" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 1">
                             <div (click)="esCorrecta('respuesta1')" class="input-group-text">
                                 <i [ngClass]="cambiaIconoRespuesta('respuesta1')"></i>
                             </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-6">
                         <div formGroupName="respuesta2" class="input-group">
-                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
+                            <input type="text" formControlName="titulo" (change)="cambio('respuesta2')" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 2">
                             <div (click)="esCorrecta('respuesta2')" class="input-group-text">
                                 <i class="animate__animated animate__bounce" [ngClass]="cambiaIconoRespuesta('respuesta2')"></i>
                             </div>
@@ -49,7 +49,7 @@
                 <div class="row mt-3">
                     <div formGroupName="respuesta3" class="col-6">
                         <div class="input-group">
-                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 3 (opcional)">
+                            <input type="text" formControlName="titulo" (change)="cambio('respuesta3')" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 3 (opcional)">
                             <div (click)="esCorrecta('respuesta3')" class="input-group-text">
                                 <i [ngClass]="cambiaIconoRespuesta('respuesta3')"></i>
                             </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-6">
                         <div formGroupName="respuesta4" class="input-group">
-                            <input type="text" formControlName="titulo" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 4 (opcional)">
+                            <input type="text" formControlName="titulo" (change)="cambio('respuesta4')" class="form-control text-center input-respuesta" placeholder="Agregar respuesta 4 (opcional)">
                             <div (click)="esCorrecta('respuesta4')" class="input-group-text">
                                 <i [ngClass]="cambiaIconoRespuesta('respuesta4')"></i>
                             </div>
