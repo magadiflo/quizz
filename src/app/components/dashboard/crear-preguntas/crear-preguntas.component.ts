@@ -72,6 +72,7 @@ export class CrearPreguntasComponent implements OnInit {
 
     const pregunta: Pregunta = { titulo, puntos, segundos, listaRespuestas };
     console.log(pregunta);
+    this.reset();
   }
 
   todasIncorrectas(): boolean { //Verifica que solo haya una respuesta seleccionada
@@ -135,6 +136,30 @@ export class CrearPreguntasComponent implements OnInit {
 
   getValue(campo: string, propiedad: string): string | boolean {
     return this.miFormulario.get(campo)?.get(propiedad)?.value;
+  }
+
+  reset(): void {
+    this.miFormulario.patchValue({
+      titulo: '',
+      segundos: 10,
+      puntos: 100,
+      respuesta1: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta2: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta3: {
+        titulo: '',
+        esCorrecta: false
+      },
+      respuesta4: {
+        titulo: '',
+        esCorrecta: false
+      },
+    });
   }
 
 }
