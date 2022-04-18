@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CrearPreguntasComponent implements OnInit {
 
+  mostrarError: boolean = false;
+
   miFormulario: FormGroup = this.fb.group({
     titulo: ['', [Validators.required]],
     segundos: [10, [Validators.required]],
@@ -50,6 +52,14 @@ export class CrearPreguntasComponent implements OnInit {
 
   agrearPregunta() {
     console.log(this.miFormulario.value);
+    if(this.miFormulario.invalid){
+      return this.error();
+    }
+  }
+
+  error(): void {
+    this.mostrarError = true;
+    setTimeout(() => this.mostrarError = false, 3000);
   }
 
   cambiaSegundos(segundos: number): void {
@@ -83,7 +93,7 @@ export class CrearPreguntasComponent implements OnInit {
 
   cambiaIconoRespuesta(campoRespuesta: string) {
     return {
-      'far fa-circle' : !this.obtenerEstadoRespuesta(campoRespuesta),
+      'far fa-circle': !this.obtenerEstadoRespuesta(campoRespuesta),
       'fas fa-check-circle animate__animated animate__heartBeat': this.obtenerEstadoRespuesta(campoRespuesta)
     }
   }
