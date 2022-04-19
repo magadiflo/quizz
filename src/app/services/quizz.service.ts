@@ -30,4 +30,8 @@ export class QuizzService {
     return this._firestore.collection('cuestionarios').add(cuestionario);
   }
 
+  getCuestionarioByIdUser(uid: string) {
+    return this._firestore.collection('cuestionarios', ref => ref.where('uid', '==', uid)).snapshotChanges();
+  }
+
 }
