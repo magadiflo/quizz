@@ -1,7 +1,10 @@
 <div class="d-flex justify-content-center mt-3">
     <button type="button" [routerLink]="['crear-quizz']" class="btn-principal btn-quizz">Nuevo</button>
 </div>
-<div class="container">
+<div *ngIf="loading" class="d-flex justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="listaCuestionarios.length > 0 && !loading" class="container">
     <div class="row mt-3">
         <div class="col-12 col-sm-12 col-md-12 col-lg-8 offset-lg-2">
             <div class="card">
@@ -16,10 +19,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mundial de fútbol</td>
-                                <td>10</td>
-                                <td><span class="badge bg-dark">MNG8G</span></td>
+                            <tr *ngFor="let cuestionario of listaCuestionarios">
+                                <td>{{ cuestionario.titulo }}</td>
+                                <td>{{ cuestionario.cantPreguntas }}</td>
+                                <td><span class="badge bg-dark">{{ cuestionario.codigo }}</span></td>
                                 <td>
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     <i class="fa-solid fa-chart-line text-primary"></i>
@@ -33,3 +36,4 @@
         </div>
     </div>
 </div>
+

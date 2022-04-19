@@ -16,7 +16,9 @@ import { Cuestionario } from '../../../models/cuestionario.model';
 export class ListCuestionariosComponent implements OnInit, OnDestroy {
 
   subscriptionUser: Subscription = new Subscription();
+  subscriptionQuizz: Subscription = new Subscription();
   listaCuestionarios: Cuestionario[] = [];
+  loading: boolean = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,6 +26,7 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
     private _quizzService: QuizzService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.subscriptionUser = this.afAuth.user.subscribe(user => {
       if (user && user.emailVerified) {
         this.getCuestionarios(user.uid);
@@ -35,19 +38,27 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptionUser.unsubscribe();
+    this.subscriptionQuizz.unsubscribe();
   }
 
   getCuestionarios(uid: string) {
-    this._quizzService.getCuestionarioByIdUser(uid)
-      .subscribe(data => {
-        this.listaCuestionarios = [];
-        data.forEach((element: any) => {
-          this.listaCuestionarios.push({
-            id: element.payload.doc.id,
-            ...element.payload.doc.data()
+    this.subscriptionQuizz = this._quizzService.getCuestionarioByIdUser(uid)
+      .subscribe({
+        next: data => {
+          this.listaCuestionarios = [];
+          data.forEach((element: any) => {
+            this.listaCuestionarios.push({
+              id: element.payload.doc.id,
+              ...element.payload.doc.data()
+            });
           });
-        });
-        console.log(this.listaCuestionarios);
+          console.log(this.listaCuestionarios);
+          this.loading = false;
+        },
+        error: error => {
+          console.log(error);
+          this.loading = false;
+        }
       });
   }
 
