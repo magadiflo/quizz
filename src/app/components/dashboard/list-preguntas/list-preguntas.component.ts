@@ -48,10 +48,13 @@ export class ListPreguntasComponent implements OnInit {
       cantPreguntas: this.listaPreguntas.length,
       fechaCreacion: new Date(),
       listaPreguntas: this.listaPreguntas,
-      id: 1
     }
-    this.toastr.success('El cuestionario fue registrado exitosamente', '¡Completado!');
-    this.router.navigate(['/dashboard']);
+    this.quizzService.crearCuestionario(cuestionario).then(data => {
+      this.toastr.success('El cuestionario fue registrado exitosamente', '¡Completado!');
+      this.router.navigate(['/dashboard']);
+    }).catch(error => {
+      console.log(error);  
+    });
   }
 
   generarCodigo(): string {
