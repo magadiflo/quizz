@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { nanoid } from 'nanoid';
+import { ToastrService } from 'ngx-toastr';
+
 import { QuizzService } from '../../../services/quizz.service';
 import { Pregunta } from '../../../models/pregunta.model';
 import { Respuesta } from '../../../models/respuesta.model';
 import { Cuestionario } from '../../../models/cuestionario.model';
+import { User } from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-list-preguntas',
@@ -17,7 +21,8 @@ export class ListPreguntasComponent implements OnInit {
 
   constructor(
     private quizzService: QuizzService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if(this.quizzService.tituloCuestionario === '' || this.quizzService.descripcion === ''){
@@ -34,17 +39,23 @@ export class ListPreguntasComponent implements OnInit {
   }
 
   finalizarCuestionario(): void {
+    const usuario: User = JSON.parse(localStorage.getItem('user') || '{}');
     const cuestionario: Cuestionario = {
-      uid: '',
+      uid: usuario.uid,
       titulo: this.quizzService.tituloCuestionario,
       descripcion: this.quizzService.descripcion,
-      codigo: '',
+      codigo: this.generarCodigo(),
       cantPreguntas: this.listaPreguntas.length,
       fechaCreacion: new Date(),
       listaPreguntas: this.listaPreguntas,
       id: 1
     }
-    console.log(cuestionario);  
+    this.toastr.success('El cuestionario fue registrado exitosamente', '¡Completado!');
+    this.router.navigate(['/dashboard']);
+  }
+
+  generarCodigo(): string {
+    return nanoid(6).toUpperCase();
   }
 
   activa(respuesta: Respuesta) {
