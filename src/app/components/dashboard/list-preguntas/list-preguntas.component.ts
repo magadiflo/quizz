@@ -18,6 +18,7 @@ import { User } from '../../../interfaces/user.interface';
 export class ListPreguntasComponent implements OnInit {
 
   listaPreguntas: Pregunta[] = [];
+  loading: boolean = false;
 
   constructor(
     private quizzService: QuizzService,
@@ -25,7 +26,7 @@ export class ListPreguntasComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if(this.quizzService.tituloCuestionario === '' || this.quizzService.descripcion === ''){
+    if (this.quizzService.tituloCuestionario === '' || this.quizzService.descripcion === '') {
       this.router.navigate(['/dashboard']);
     }
     this.quizzService.getPreguntas()
@@ -39,6 +40,7 @@ export class ListPreguntasComponent implements OnInit {
   }
 
   finalizarCuestionario(): void {
+    this.loading = true;
     const usuario: User = JSON.parse(localStorage.getItem('user') || '{}');
     const cuestionario: Cuestionario = {
       uid: usuario.uid,
@@ -53,7 +55,8 @@ export class ListPreguntasComponent implements OnInit {
       this.toastr.success('El cuestionario fue registrado exitosamente', '¡Completado!');
       this.router.navigate(['/dashboard']);
     }).catch(error => {
-      console.log(error);  
+      this.loading = false;
+      console.log(error);
     });
   }
 
