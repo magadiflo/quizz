@@ -23,6 +23,10 @@ export class ListPreguntasComponent implements OnInit {
       });
   }
 
+  eliminarPregunta(index: number): void {
+    this.listaPreguntas.splice(index, 1);
+  }
+
   activa(respuesta: Respuesta) {
     return {
       'active text-white': respuesta.esCorrecta === true

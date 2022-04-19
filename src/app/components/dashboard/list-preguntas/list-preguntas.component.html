@@ -1,6 +1,6 @@
 <div *ngIf="listaPreguntas.length > 0" class="row mt-3">
     <div class="col-lg-8 offset-lg-2">
-        <div *ngFor="let pregunta of listaPreguntas" class="card mb-3">
+        <div *ngFor="let pregunta of listaPreguntas; let i = index;" class="card mb-3">
             <div class="card-body text-center">
                 <p class="titulo-pregunta titulo">{{ pregunta.titulo }}</p>
                 <div class="row">
@@ -16,7 +16,7 @@
                         [ngClass]="activa(respuesta)">{{ respuesta.titulo }}</li>
                 </ul>
                 <div>
-                    <i class="fas fa-trash"></i>
+                    <i (click)="eliminarPregunta(i)" class="fas fa-trash"></i>
                 </div>
             </div>
         </div>
