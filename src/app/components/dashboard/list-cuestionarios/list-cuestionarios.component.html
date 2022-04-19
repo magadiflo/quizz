@@ -26,7 +26,7 @@
                                 <td>
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     <i class="fa-solid fa-chart-line text-primary"></i>
-                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                    <i (click)="eliminarCuestionario(cuestionario.id!)" class="fa-solid fa-trash-can text-danger"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -35,5 +35,8 @@
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="listaCuestionarios.length == 0 && !loading" class="alert alert-info m-4">
+    <strong>No hay cuestionarios para mostrar</strong>
 </div>
 

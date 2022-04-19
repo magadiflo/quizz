@@ -9,6 +9,6 @@ export class Cuestionario {
         public cantPreguntas: number,
         public fechaCreacion: Date,
         public listaPreguntas: Pregunta[],
-        public id?: number,
+        public id?: string,
     ) { }
 }
