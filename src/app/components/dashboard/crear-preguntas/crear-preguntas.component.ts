@@ -71,7 +71,9 @@ export class CrearPreguntasComponent implements OnInit {
     const segundos = this.miFormulario.get('segundos')?.value;
 
     const pregunta: Pregunta = { titulo, puntos, segundos, listaRespuestas };
-    console.log(pregunta);
+    
+    this.quizzService.agregarPregunta(pregunta);
+    
     this.reset();
   }
 
