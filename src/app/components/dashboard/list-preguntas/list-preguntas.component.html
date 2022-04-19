@@ -11,6 +11,18 @@
                         <p><span class="badge bg-dark">{{ pregunta.puntos }}pts</span></p>
                     </div>
                 </div>
+                <ul class="list-group">
+                    <li *ngFor="let respuesta of pregunta.listaRespuestas" class="list-group-item titulo"
+                        [ngClass]="activa(respuesta)">{{ respuesta.titulo }}</li>
+                </ul>
+                <div>
+                    <i class="fas fa-trash"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <button type="button" class="btn-principal btn-finalizar">Finalizar cuestionario</button>
             </div>
         </div>
     </div>

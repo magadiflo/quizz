@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { QuizzService } from '../../../services/quizz.service';
 import { Pregunta } from '../../../models/pregunta.model';
+import { Respuesta } from '../../../models/respuesta.model';
 
 @Component({
   selector: 'app-list-preguntas',
@@ -20,6 +21,12 @@ export class ListPreguntasComponent implements OnInit {
         this.listaPreguntas.push(pregunta);
         console.log(this.listaPreguntas);
       });
+  }
+
+  activa(respuesta: Respuesta) {
+    return {
+      'active text-white': respuesta.esCorrecta === true
+    }
   }
 
 }
