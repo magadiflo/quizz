@@ -1,4 +1,7 @@
 <div class="h-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+        <strong>{{ errorText }}</strong>
+    </div>
     <input type="text" [(ngModel)]="nombre" class="form-control mb-3 input-ingresar" placeholder="Ingrese su nombre">
     <button type="button" (click)="ingresarNombre()" class="btn-ingresar btn-principal">Aceptar</button>
 </div>
