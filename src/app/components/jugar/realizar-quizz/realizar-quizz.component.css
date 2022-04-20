@@ -1,0 +1,14 @@
+.contador-pregunta {
+    font-size: 5rem;
+}
+
+.list-group-item {
+    font-size: 20px;
+    cursor: pointer;
+    color: #000000;
+}
+
+.seleccionado {
+    background-color: #363535;
+    color: #FFFFFF;
+}
