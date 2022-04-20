@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { RespuestaQuizzService } from '../../services/respuesta-quizz.service';
@@ -17,7 +18,9 @@ export class InicioComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   subscriptionCode: Subscription = new Subscription();
 
-  constructor(private respuestaQuizzService: RespuestaQuizzService) { }
+  constructor(
+    private respuestaQuizzService: RespuestaQuizzService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -46,8 +49,7 @@ export class InicioComponent implements OnInit, OnDestroy {
                 ...element.data()
               }
               this.respuestaQuizzService.cuestionario = cuestionario;
-              // TODO: Redireccionar al próximo componente
-
+              this.router.navigate(['/jugar']);
             });
           }
         },
