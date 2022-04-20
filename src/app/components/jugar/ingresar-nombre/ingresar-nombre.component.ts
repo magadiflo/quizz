@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { RespuestaQuizzService } from '../../../services/respuesta-quizz.service';
 
 @Component({
   selector: 'app-ingresar-nombre',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IngresarNombreComponent implements OnInit {
 
-  constructor() { }
+  nombre: string = '';
+
+  constructor(
+    private respuestaQuizzService: RespuestaQuizzService,
+    private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  ingresarNombre() {
+    this.respuestaQuizzService.nombreParticipante = this.nombre;
+    this.router.navigate(['/jugar', 'iniciar-contador']);
   }
 
 }

@@ -10,6 +10,7 @@ import { Cuestionario } from '../models/cuestionario.model';
 export class RespuestaQuizzService {
 
   cuestionario!: Cuestionario;
+  nombreParticipante: string = '';
 
   constructor(private _firestore: AngularFirestore) { }
 
