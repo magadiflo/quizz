@@ -54,7 +54,6 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
               ...element.payload.doc.data()
             });
           });
-          console.log(this.listaCuestionarios);
           this.loading = false;
         },
         error: error => {

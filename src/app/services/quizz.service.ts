@@ -38,5 +38,9 @@ export class QuizzService {
     return this._firestore.collection('cuestionarios').doc(idCuestionario).delete();
   }
 
+  getCuestionario(id: string): Observable<any> {
+    return this._firestore.collection('cuestionarios').doc(id).get();
+  }
+
 
 }
