@@ -1,12 +1,17 @@
-<div class="h-100 d-flex flex-column justify-content-center align-items-center">
-    <div class="alert alert-danger" role="alert" *ngIf="error">
-        <strong>Por favor ingrese PIN</strong>
+<div *ngIf="loading; else templateInicio" class="h-100 d-flex flex-column justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<ng-template #templateInicio>
+    <div class="h-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="alert alert-danger" role="alert" *ngIf="error">
+            <strong>{{ errorText }}</strong>
+        </div>
+        <input type="text" [(ngModel)]="pin" class="form-control mb-3 input-ingresar" placeholder="PIN del juego">
+        <button type="button" (click)="ingresar()" class="btn-ingresar btn-principal">Ingresar</button>
     </div>
-    <input type="text" [(ngModel)]="pin" class="form-control mb-3 input-ingresar" placeholder="PIN del juego">
-    <button type="button" (click)="ingresar()" class="btn-ingresar btn-principal">Ingresar</button>
-</div>
-<div class="fixed-bottom text-center">
-    <p class="m-0 p-3 text-white">Crea tu propio cuestionario GRATIS
-        <a [routerLink]="['usuario']" class="text-white text-decoration-none">aqui</a>
-    </p>
-</div>
+    <div class="fixed-bottom text-center">
+        <p class="m-0 p-3 text-white">Crea tu propio cuestionario GRATIS
+            <a [routerLink]="['usuario']" class="text-white text-decoration-none">aqui</a>
+        </p>
+    </div>
+</ng-template>
