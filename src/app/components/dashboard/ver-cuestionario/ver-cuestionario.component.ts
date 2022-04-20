@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 import { QuizzService } from '../../../services/quizz.service';
+import { Cuestionario } from '../../../models/cuestionario.model';
 
 @Component({
   selector: 'app-ver-cuestionario',
@@ -11,17 +12,22 @@ import { QuizzService } from '../../../services/quizz.service';
 })
 export class VerCuestionarioComponent implements OnInit {
 
+  loading: boolean = false;
+  cuestionario!: Cuestionario;
+
   constructor(
     private quizzService: QuizzService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.activatedRoute.params
       .pipe(
         switchMap(({ id }) => this.quizzService.getCuestionario(id))
       )
       .subscribe(doc => {
-        console.log(doc.data());
+        this.cuestionario = doc.data();
+        this.loading = false;
       });
 
   }

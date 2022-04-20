@@ -1,1 +1,13 @@
-<p>ver-cuestionario works!</p>
+<div *ngIf="loading; else templateCuestionario" class="d-flex justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<ng-template #templateCuestionario>
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="titulo">{{ cuestionario.titulo | uppercase }}</h2>
+                <h4>{{ cuestionario.descripcion }}</h4>
+            </div>
+        </div>
+    </div>
+</ng-template>
