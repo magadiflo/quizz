@@ -29,7 +29,12 @@ export class VerCuestionarioComponent implements OnInit {
         this.cuestionario = doc.data();
         this.loading = false;
       });
+  }
 
+  active(esCorrecta: boolean) {  
+    return {
+      'active text-white': esCorrecta
+    }
   }
 
 }
