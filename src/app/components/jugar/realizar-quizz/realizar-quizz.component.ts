@@ -25,7 +25,7 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   validateRefresh(): void {
-    if(this.cuestionario == undefined){
+    if (this.cuestionario == undefined) {
       this.router.navigate(['/']);
     }
   }

@@ -7,10 +7,9 @@
             <h3 class="titulo">{{ obtenerTitulo() }}</h3>
             <div class="col-lg-6 offset-lg-3">
                 <ul class="list-group mt-3">
-                    <li class="list-group-item titulo seleccionado">Lima</li>
-                    <li class="list-group-item titulo">Buenos Aires</li>
-                    <li class="list-group-item titulo">Caracas</li>
-                    <li class="list-group-item titulo">Bogotá</li>
+                    <li *ngFor="let alternativa of cuestionario.listaPreguntas[0].listaRespuestas" 
+                        class="list-group-item animate__animated animate__fadeIn titulo" 
+                        [ngClass]="{'seleccionado' : alternativa.esCorrecta}">{{ alternativa.titulo }}</li>
                 </ul>
                 <button type="button" class="btn-principal mt-3 w-100">Aceptar</button>
             </div>
