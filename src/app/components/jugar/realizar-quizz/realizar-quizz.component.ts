@@ -13,6 +13,9 @@ export class RealizarQuizzComponent implements OnInit {
 
   cuestionario!: Cuestionario;
   nombreParticipante: string = '';
+  indexPregunta: number = 0;
+  segundos: number = 0;
+  setInterval: any;
 
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
@@ -22,6 +25,7 @@ export class RealizarQuizzComponent implements OnInit {
     this.cuestionario = this.respuestaQuizzService.cuestionario;
     this.nombreParticipante = this.respuestaQuizzService.nombreParticipante;
     this.validateRefresh();
+    this.iniciarContador();
   }
 
   validateRefresh(): void {
@@ -31,11 +35,23 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   obtenerSegundos(): number {
-    return this.cuestionario.listaPreguntas[0].segundos;
+    return this.segundos;
   }
 
   obtenerTitulo(): string {
-    return this.cuestionario.listaPreguntas[0].titulo;
+    return this.cuestionario.listaPreguntas[this.indexPregunta].titulo;
+  }
+
+  iniciarContador() {
+    this.segundos = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
+    this.setInterval = setInterval(() => {
+      if(this.segundos === 0){
+        this.indexPregunta++;
+        clearInterval(this.setInterval);
+        this.iniciarContador();
+      }
+      this.segundos--;
+    }, 1000);
   }
 
 }

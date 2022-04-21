@@ -7,7 +7,7 @@
             <h3 class="titulo">{{ obtenerTitulo() }}</h3>
             <div class="col-lg-6 offset-lg-3">
                 <ul class="list-group mt-3">
-                    <li *ngFor="let alternativa of cuestionario.listaPreguntas[0].listaRespuestas" 
+                    <li *ngFor="let alternativa of cuestionario.listaPreguntas[indexPregunta].listaRespuestas" 
                         class="list-group-item animate__animated animate__fadeIn titulo" 
                         [ngClass]="{'seleccionado' : alternativa.esCorrecta}">{{ alternativa.titulo }}</li>
                 </ul>
