@@ -1,1 +1,6 @@
-<p>respuesta-usuario works!</p>
+<div *ngIf="loading; else templateRespuesta" class="h-100 d-flex flex-column justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<ng-template #templateRespuesta>
+    datos...
+</ng-template>

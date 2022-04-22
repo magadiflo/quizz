@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { switchMap } from 'rxjs';
+
+import { RespuestaQuizzService } from '../../../services/respuesta-quizz.service';
 
 @Component({
   selector: 'app-respuesta-usuario',
@@ -7,9 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RespuestaUsuarioComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean = false;
+
+  constructor(
+    private respuestaQuizzService: RespuestaQuizzService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.loading = true;
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ id }) => this.respuestaQuizzService.getRespuestaUsuario(id))
+      )
+      .subscribe(doc => {
+        if(!doc.exists){
+          this.router.navigate(['/']);
+        }
+        this.loading = false;
+        console.log(doc.data()); 
+      });
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+
 import { Cuestionario } from '../models/cuestionario.model';
 
 
@@ -22,5 +23,8 @@ export class RespuestaQuizzService {
     return this._firestore.collection('respuestas').add(respuestaUsuario);
   }
 
+  getRespuestaUsuario(id: string): Observable<any> {
+    return this._firestore.collection('respuestas').doc(id).get();
+  }
 
 }
