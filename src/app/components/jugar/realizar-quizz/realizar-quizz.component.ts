@@ -19,8 +19,12 @@ export class RealizarQuizzComponent implements OnInit {
   setInterval: any;
 
   //* Respuesta usuario
-  opcionSeleccionada!: Respuesta;
-  indexSeleccionado!: number;
+  opcionSeleccionada: Respuesta | undefined;
+  indexSeleccionado: number | undefined;
+  cantidadCorrectas: number = 0;
+  cantidadIncorrectas: number = 0;
+  puntosTotales: number = 0;
+  listRespuestaUsuario: any[] = [];
 
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
@@ -77,6 +81,19 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   agregarRespuesta() {
+    // *Creamos objeto respuesta y lo agregamos al array
+    const respuestaUsuario: any = {
+      titulo: this.cuestionario.listaPreguntas[this.indexPregunta].titulo,
+      puntosObtenidos: '',
+      segundos: '',
+      indexRespuestaSeleccionada: '',
+      listRespuestas: this.cuestionario.listaPreguntas[this.indexPregunta].listaRespuestas
+    }
+
+    this.listRespuestaUsuario.push(respuestaUsuario);
+    this.opcionSeleccionada = undefined;
+    this.indexSeleccionado = undefined;
+
     if(this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta){
       clearInterval(this.setInterval);
       // TODO: Guardamos la respuesta en Firebase. 
