@@ -12,3 +12,7 @@
     background-color: #363535;
     color: #FFFFFF;
 }
+
+.btn-principal:hover {
+    color: white;
+}

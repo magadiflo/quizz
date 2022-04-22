@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { RespuestaQuizzService } from '../../../services/respuesta-quizz.service';
 import { Cuestionario } from '../../../models/cuestionario.model';
+import { Respuesta } from '../../../models/respuesta.model';
 
 @Component({
   selector: 'app-realizar-quizz',
@@ -17,6 +18,10 @@ export class RealizarQuizzComponent implements OnInit {
   segundos: number = 0;
   setInterval: any;
 
+  //* Respuesta usuario
+  opcionSeleccionada!: Respuesta;
+  indexSeleccionado!: number;
+
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
     private router: Router) { }
@@ -25,7 +30,7 @@ export class RealizarQuizzComponent implements OnInit {
     this.cuestionario = this.respuestaQuizzService.cuestionario;
     this.nombreParticipante = this.respuestaQuizzService.nombreParticipante;
     this.validateRefresh();
-    this.iniciarContador();
+    // this.iniciarContador();
   }
 
   validateRefresh(): void {
@@ -52,6 +57,19 @@ export class RealizarQuizzComponent implements OnInit {
       }
       this.segundos--;
     }, 1000);
+  }
+
+  respuestaSeleccionada(respuesta: Respuesta, index: number) {
+    this.opcionSeleccionada = respuesta;
+    this.indexSeleccionado = index;
+    console.log(this.opcionSeleccionada);
+    console.log(this.indexSeleccionado);  
+  }
+
+  addClassOption(respuesta: Respuesta) {
+    return {
+      'seleccionado' : respuesta === this.opcionSeleccionada
+    }
   }
 
 }
