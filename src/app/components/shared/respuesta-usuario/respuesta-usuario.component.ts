@@ -27,11 +27,12 @@ export class RespuestaUsuarioComponent implements OnInit {
         switchMap(({ id }) => this.respuestaQuizzService.getRespuestaUsuario(id))
       )
       .subscribe(doc => {
-        if(!doc.exists){
+        if (!doc.exists) {
           this.router.navigate(['/']);
         }
         this.loading = false;
-        this.respuesta = doc.data(); 
+        this.respuesta = doc.data();
+        console.log(this.respuesta);
       });
   }
 

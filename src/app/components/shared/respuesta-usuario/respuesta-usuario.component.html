@@ -40,6 +40,24 @@
                     </div>
                 </div>
             </div>
+            <div *ngFor="let pregunta of respuesta.listRespuestaUsuario" class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="titulo">{{ pregunta.titulo }}</h3>
+                            <ul class="list-group">
+                                <li *ngFor="let resp of pregunta.listRespuestas" 
+                                    class="list-group-item titulo">{{resp.titulo}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-6 offset-lg-3 text-center">
+                    <button type="button" class="w-100 btn-principal">Volver</button>
+                </div>
+            </div>
         </div>
     </div>
 </ng-template>
