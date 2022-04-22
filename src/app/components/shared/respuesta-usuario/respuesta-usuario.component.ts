@@ -36,4 +36,8 @@ export class RespuestaUsuarioComponent implements OnInit {
       });
   }
 
+  volver() {
+    this.router.navigate(['/']);
+  }
+
 }
