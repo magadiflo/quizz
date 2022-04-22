@@ -100,8 +100,7 @@ export class RealizarQuizzComponent implements OnInit {
     //* Validamos si es la última pregunta
     if (this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta) {
       clearInterval(this.setInterval);
-      // TODO: Guardamos la respuesta en Firebase. 
-      console.log(this.listRespuestaUsuario);
+      this.guardarRespuestaCuestionario();
       this.router.navigate(['/jugar', 'respuesta-usuario']);
     } else {
       this.indexPregunta++;
@@ -154,6 +153,21 @@ export class RealizarQuizzComponent implements OnInit {
     } else {
       this.cantidadCorrectas++;
     }
+  }
+
+  guardarRespuestaCuestionario() {
+    const respuestaCuestionario: any = {
+      idCuestionario: this.cuestionario.id,
+      nombreParticipante: this.nombreParticipante,
+      fecha: new Date(),
+      cantidadPreguntas: this.cuestionario.cantPreguntas,
+      cantidadCorrectas: this.cantidadCorrectas,
+      cantidadIncorrectas: this.cantidadIncorrectas,
+      puntosTotales: this.puntosTotales,
+      listRespuestaUsuario: this.listRespuestaUsuario,
+    }
+
+    console.log(respuestaCuestionario);  
   }
 
 }
