@@ -81,12 +81,15 @@ export class RealizarQuizzComponent implements OnInit {
   }
 
   agregarRespuesta() {
-    // *Creamos objeto respuesta y lo agregamos al array
+    //* Incrementamos contadores (correcta e incorrecta)
+    this.contadorCorrectaIncorrecta();
+
+    //* Creamos objeto respuesta y lo agregamos al array
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listaPreguntas[this.indexPregunta].titulo,
       puntosObtenidos: this.obtenemosPuntosPregunta(),
       segundos: this.obtenemosSegundos(),
-      indexRespuestaSeleccionada: '',
+      indexRespuestaSeleccionada: this.obtenemosIndexSeleccionado(),
       listRespuestas: this.cuestionario.listaPreguntas[this.indexPregunta].listaRespuestas
     }
 
@@ -94,9 +97,11 @@ export class RealizarQuizzComponent implements OnInit {
     this.opcionSeleccionada = undefined;
     this.indexSeleccionado = undefined;
 
+    //* Validamos si es la última pregunta
     if (this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta) {
       clearInterval(this.setInterval);
       // TODO: Guardamos la respuesta en Firebase. 
+      console.log(this.listRespuestaUsuario);
       this.router.navigate(['/jugar', 'respuesta-usuario']);
     } else {
       this.indexPregunta++;
@@ -130,6 +135,25 @@ export class RealizarQuizzComponent implements OnInit {
     const segundosPregunta = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
     const segundosRespondidos = segundosPregunta - this.segundos;
     return segundosRespondidos.toString();
+  }
+
+  obtenemosIndexSeleccionado() {
+    return this.opcionSeleccionada === undefined ? '' : this.indexSeleccionado;
+  }
+
+  contadorCorrectaIncorrecta() {
+    //* Validamos si el usuario seleccionó pregunta
+    if (this.opcionSeleccionada === undefined) {
+      this.cantidadIncorrectas++;
+      return;
+    }
+
+    //* Preguntamos si la opción es incorrecta
+    if (this.opcionSeleccionada.esCorrecta === false) {
+      this.cantidadIncorrectas++;
+    } else {
+      this.cantidadCorrectas++;
+    }
   }
 
 }
