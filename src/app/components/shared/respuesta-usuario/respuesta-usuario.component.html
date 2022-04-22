@@ -2,5 +2,44 @@
     <app-spinner></app-spinner>
 </div>
 <ng-template #templateRespuesta>
-    datos...
+    <div class="container mt-5 text-center">
+        <div class="animate__animated animate__backInDown">
+            <h1 class="titulo">Resumen</h1>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt-2">
+                        <div class="col-lg-6">
+                            <h3 class="titulo">Nombre: {{ respuesta.nombreParticipante }}</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3 class="titulo">Puntos: {{ respuesta.puntosTotales }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body bg-dark text-white">
+                            <h6 class="titulo">Cant. Preg: {{ respuesta.cantidadPreguntas }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body bg-success text-white">
+                            <h6 class="titulo">Correctas: {{ respuesta.cantidadCorrectas }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body bg-danger text-white">
+                            <h6 class="titulo">Incorrectas: {{ respuesta.cantidadIncorrectas }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </ng-template>

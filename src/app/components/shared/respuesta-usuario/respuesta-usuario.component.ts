@@ -13,6 +13,7 @@ import { RespuestaQuizzService } from '../../../services/respuesta-quizz.service
 export class RespuestaUsuarioComponent implements OnInit {
 
   loading: boolean = false;
+  respuesta: any;
 
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
@@ -30,7 +31,7 @@ export class RespuestaUsuarioComponent implements OnInit {
           this.router.navigate(['/']);
         }
         this.loading = false;
-        console.log(doc.data()); 
+        this.respuesta = doc.data(); 
       });
   }
 
