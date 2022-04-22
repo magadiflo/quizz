@@ -85,7 +85,7 @@ export class RealizarQuizzComponent implements OnInit {
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listaPreguntas[this.indexPregunta].titulo,
       puntosObtenidos: this.obtenemosPuntosPregunta(),
-      segundos: '',
+      segundos: this.obtenemosSegundos(),
       indexRespuestaSeleccionada: '',
       listRespuestas: this.cuestionario.listaPreguntas[this.indexPregunta].listaRespuestas
     }
@@ -103,6 +103,7 @@ export class RealizarQuizzComponent implements OnInit {
       this.segundos = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
     }
   }
+
   obtenemosPuntosPregunta(): number {
     //* Si el usuario no seleccionó ninguna pregunta
     if (this.opcionSeleccionada === undefined) {
@@ -119,6 +120,16 @@ export class RealizarQuizzComponent implements OnInit {
     }
 
     return 0;
+  }
+
+  obtenemosSegundos(): string {
+    //* Validamos si el usuario no respondió la pregunta
+    if (this.opcionSeleccionada === undefined) {
+      return 'NO RESPONDIÓ';
+    }
+    const segundosPregunta = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
+    const segundosRespondidos = segundosPregunta - this.segundos;
+    return segundosRespondidos.toString();
   }
 
 }
