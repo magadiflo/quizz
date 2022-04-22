@@ -54,7 +54,7 @@ export class RealizarQuizzComponent implements OnInit {
   iniciarContador() {
     this.segundos = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
     this.setInterval = setInterval(() => {
-      if(this.segundos === 0){
+      if (this.segundos === 0) {
         this.agregarRespuesta();
       }
       this.segundos--;
@@ -65,12 +65,12 @@ export class RealizarQuizzComponent implements OnInit {
     this.opcionSeleccionada = respuesta;
     this.indexSeleccionado = index;
     console.log(this.opcionSeleccionada);
-    console.log(this.indexSeleccionado);  
+    console.log(this.indexSeleccionado);
   }
 
   addClassOption(respuesta: Respuesta) {
     return {
-      'seleccionado' : respuesta === this.opcionSeleccionada
+      'seleccionado': respuesta === this.opcionSeleccionada
     }
   }
 
@@ -84,7 +84,7 @@ export class RealizarQuizzComponent implements OnInit {
     // *Creamos objeto respuesta y lo agregamos al array
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listaPreguntas[this.indexPregunta].titulo,
-      puntosObtenidos: '',
+      puntosObtenidos: this.obtenemosPuntosPregunta(),
       segundos: '',
       indexRespuestaSeleccionada: '',
       listRespuestas: this.cuestionario.listaPreguntas[this.indexPregunta].listaRespuestas
@@ -94,7 +94,7 @@ export class RealizarQuizzComponent implements OnInit {
     this.opcionSeleccionada = undefined;
     this.indexSeleccionado = undefined;
 
-    if(this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta){
+    if (this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta) {
       clearInterval(this.setInterval);
       // TODO: Guardamos la respuesta en Firebase. 
       this.router.navigate(['/jugar', 'respuesta-usuario']);
@@ -102,6 +102,23 @@ export class RealizarQuizzComponent implements OnInit {
       this.indexPregunta++;
       this.segundos = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
     }
+  }
+  obtenemosPuntosPregunta(): number {
+    //* Si el usuario no seleccionó ninguna pregunta
+    if (this.opcionSeleccionada === undefined) {
+      return 0;
+    }
+
+    const puntosPregunta = this.cuestionario.listaPreguntas[this.indexPregunta].puntos;
+
+    //* Validamos si la pregunta es correcta
+    if (this.opcionSeleccionada.esCorrecta === true) {
+      //*Incrementamos la variable puntosTotales...
+      this.puntosTotales += puntosPregunta;
+      return puntosPregunta;
+    }
+
+    return 0;
   }
 
 }
