@@ -1,19 +1,24 @@
-<div class="container mt-3">
-    <div class="d-flex justify-content-center mt-3">
-        <h1 class="titulo contador-pregunta">{{ obtenerSegundos() }}</h1>
-    </div>
-    <div class="row mt-2">
-        <div class="text-center">
-            <h3 class="titulo">{{ obtenerTitulo() }}</h3>
-            <div class="col-lg-6 offset-lg-3">
-                <ul class="list-group mt-3">
-                    <li *ngFor="let alternativa of cuestionario.listaPreguntas[indexPregunta].listaRespuestas; let i = index;" 
-                        class="list-group-item animate__animated animate__fadeIn titulo" 
-                        [ngClass]="addClassOption(alternativa)"
-                        (click)="respuestaSeleccionada(alternativa, i)">{{ alternativa.titulo }}</li>
-                </ul>
-                <button type="button" (click)="siguiente()" [disabled]="!opcionSeleccionada" class="btn btn-principal mt-3 w-100">Aceptar</button>
+<div *ngIf="loading; else templateQuizz" class="h-100 d-flex flex-column justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<ng-template #templateQuizz>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-center mt-3">
+            <h1 class="titulo contador-pregunta">{{ obtenerSegundos() }}</h1>
+        </div>
+        <div class="row mt-2">
+            <div class="text-center">
+                <h3 class="titulo">{{ obtenerTitulo() }}</h3>
+                <div class="col-lg-6 offset-lg-3">
+                    <ul class="list-group mt-3">
+                        <li *ngFor="let alternativa of cuestionario.listaPreguntas[indexPregunta].listaRespuestas; let i = index;" 
+                            class="list-group-item animate__animated animate__fadeIn titulo" 
+                            [ngClass]="addClassOption(alternativa)"
+                            (click)="respuestaSeleccionada(alternativa, i)">{{ alternativa.titulo }}</li>
+                    </ul>
+                    <button type="button" (click)="siguiente()" [disabled]="!opcionSeleccionada" class="btn btn-principal mt-3 w-100">Aceptar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</ng-template>

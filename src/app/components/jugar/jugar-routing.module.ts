@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: IngresarNombreComponent, },
   { path: 'iniciar-contador', component: ContadorInicialComponent, },
   { path: 'realizar-quizz', component: RealizarQuizzComponent, },
-  { path: 'respuesta-usuario', component: RespuestaUsuarioComponent, },
+  { path: 'respuesta-usuario/:id', component: RespuestaUsuarioComponent, },
 ];
 
 @NgModule({

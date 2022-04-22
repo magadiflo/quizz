@@ -26,6 +26,8 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   puntosTotales: number = 0;
   listRespuestaUsuario: any[] = [];
 
+  loading: boolean = false;
+
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
     private router: Router) { }
@@ -105,7 +107,6 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     if (this.cuestionario.listaPreguntas.length - 1 === this.indexPregunta) {
       clearInterval(this.setInterval);
       this.guardarRespuestaCuestionario();
-      this.router.navigate(['/jugar', 'respuesta-usuario']);
     } else {
       this.indexPregunta++;
       this.segundos = this.cuestionario.listaPreguntas[this.indexPregunta].segundos;
@@ -171,7 +172,15 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       listRespuestaUsuario: this.listRespuestaUsuario,
     }
 
-    console.log(respuestaCuestionario);  
+    this.loading = true;
+    //* Almacenamos la respuesta en firebase
+    this.respuestaQuizzService.setRespuestaUsuario(respuestaCuestionario).then(data => {
+      console.log(data);
+      this.router.navigate(['/jugar', 'respuesta-usuario', data.id]);
+    }).catch(error => {
+      console.log(error);
+      this.router.navigate(['/']);
+    });
   }
 
 }
