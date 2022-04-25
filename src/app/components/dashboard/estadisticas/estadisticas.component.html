@@ -1,1 +1,41 @@
-<p>estadisticas works!</p>
+<div *ngIf="loading" class="d-flex justify-content-center align-items-center">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!loading" class="container mt-3">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card card-titulo">
+            <div class="card-body">
+                <h2 class="titulo">Listado de respuestas</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Participante</th>
+                                <th>Fecha</th>
+                                <th>Puntos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let respuestas of listRespuestasUsuario">
+                                <td>{{ respuestas.nombreParticipante }}</td>
+                                <td>{{ respuestas.fecha.toDate() | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ respuestas.puntosTotales }}</td>
+                                <td>
+                                    <i class="fas fa-search text-primary"></i>
+                                    <i class="fas fa-trash text-danger"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
