@@ -28,7 +28,7 @@
                                 <td>{{ respuestas.fecha.toDate() | date: 'dd/MM/yyyy' }}</td>
                                 <td>{{ respuestas.puntosTotales }}</td>
                                 <td>
-                                    <i class="fas fa-search text-primary"></i>
+                                    <i [routerLink]="['/dashboard', 'respuesta-admin', respuestas.id]" class="fas fa-search text-primary"></i>
                                     <i (click)="eliminarRespuestaUsuario(respuestas.id)" class="fas fa-trash text-danger"></i>
                                 </td>
                             </tr>

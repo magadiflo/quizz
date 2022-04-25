@@ -14,6 +14,7 @@ export class RespuestaUsuarioComponent implements OnInit {
 
   loading: boolean = false;
   respuesta: any;
+  rutaAnterior: string = '';
 
   constructor(
     private respuestaQuizzService: RespuestaQuizzService,
@@ -21,6 +22,7 @@ export class RespuestaUsuarioComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.rutaAnterior = this.activatedRoute.snapshot.url[0].path;
     this.loading = true;
     this.activatedRoute.params
       .pipe(
@@ -37,7 +39,11 @@ export class RespuestaUsuarioComponent implements OnInit {
   }
 
   volver() {
-    this.router.navigate(['/']);
+    if (this.rutaAnterior === 'respuesta-admin') {
+      this.router.navigate(['/dashboard','estadisticas', this.respuesta.idCuestionario]);     
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 }
