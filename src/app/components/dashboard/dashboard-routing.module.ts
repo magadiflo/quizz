@@ -5,12 +5,14 @@ import { ListCuestionariosComponent } from './list-cuestionarios/list-cuestionar
 import { CrearQuizzComponent } from './crear-quizz/crear-quizz.component';
 import { CrearPreguntasComponent } from './crear-preguntas/crear-preguntas.component';
 import { VerCuestionarioComponent } from './ver-cuestionario/ver-cuestionario.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 const routes: Routes = [
   { path: '', component: ListCuestionariosComponent, },
   { path: 'crear-quizz', component: CrearQuizzComponent, },
   { path: 'crear-preguntas', component: CrearPreguntasComponent, },
   { path: 'ver-cuestionario/:id', component:  VerCuestionarioComponent, },
+  { path: 'estadisticas/:id', component:  EstadisticasComponent, },
 ];
 
 @NgModule({

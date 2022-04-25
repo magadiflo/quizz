@@ -25,7 +25,7 @@
                                 <td><span class="badge bg-dark">{{ cuestionario.codigo }}</span></td>
                                 <td>
                                     <i [routerLink]="['/dashboard', 'ver-cuestionario', cuestionario.id]" class="fa-solid fa-magnifying-glass"></i>
-                                    <i class="fa-solid fa-chart-line text-primary"></i>
+                                    <i [routerLink]="['/dashboard', 'estadisticas', cuestionario.id]" class="fa-solid fa-chart-line text-primary"></i>
                                     <i (click)="eliminarCuestionario(cuestionario.id!)" class="fa-solid fa-trash-can text-danger"></i>
                                 </td>
                             </tr>
